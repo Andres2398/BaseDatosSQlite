@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import entidades.Cliente;
+import entidades.Reserva;
 import presentacion.Presentador;
 
 /**
@@ -13,7 +14,9 @@ import presentacion.Presentador;
 public class MenuInterfaz extends JFrame {
 	String valoresCliente[];
 	Presentador pr;
-
+	AltaCliente at = new AltaCliente(this, true);
+	IntroducirId idInterfaz = new IntroducirId(this, true);
+	Tabla tb = new Tabla(this, true);
 	public MenuInterfaz(Presentador presentador) {
 		initComponents();
 		setVisible(true);
@@ -33,7 +36,7 @@ public class MenuInterfaz extends JFrame {
 		int opcionSeleccionada = ListaOpciones.getSelectedIndex(); // obtiene la opción seleccionada
 		switch (opcionSeleccionada) {
 		case 0:
-			AltaCliente at = new AltaCliente(this, true);
+
 			at.setVisible(true);
 			conseguirValores(at);
 			pr.introducirCliente(valoresCliente);
@@ -42,19 +45,30 @@ public class MenuInterfaz extends JFrame {
 			pr.solicitarMostrarTodos();
 			break;
 		case 2:
-			IntroducirId idInterfaz = new IntroducirId(this, true);
+			idInterfaz.setVisible(true);
 			int id = idInterfaz.getNumero();
 			pr.solicitarMostrarPersona(id);
 			break;
 		case 3:
-			IntroducirId idInterfazActualizar = new IntroducirId(this, true);
-			int idActualizar = idInterfazActualizar.getNumero();
+			idInterfaz.setVisible(true);
+			int idActualizar = idInterfaz.getNumero();
 			pr.actualizarPersona(idActualizar);
 			break;
 		case 4:
-			IntroducirId idInterfazBorrar = new IntroducirId(this, true);
-			int idBorrar = idInterfazBorrar.getNumero();
+			idInterfaz.setVisible(true);
+			int idBorrar = idInterfaz.getNumero();
 			pr.eleminarPersona(idBorrar);
+			break;
+
+		case 5:
+			idInterfaz.setVisible(true);
+			int idReservar = idInterfaz.getNumero();
+			pr.buscarPersona(idReservar);
+			break;
+		case 6:
+			idInterfaz.setVisible(true);
+			int idbuscarReserva = idInterfaz.getNumero();
+			pr.BuscarReservarPersona(idbuscarReserva);
 			break;
 		default:
 			throw new AssertionError();
@@ -68,15 +82,31 @@ public class MenuInterfaz extends JFrame {
 	}
 
 	public void mostrarClientes(List<Cliente> l) {
-		TablaClientes tb = new TablaClientes(this, true, l);
-
+		
+		tb.mostrarClientes(l);
+		
 	}
 
 	public void actualizarPersona(Cliente c) {
-		CambiarCliente cc = new CambiarCliente(this, true,c);
+		CambiarCliente cc = new CambiarCliente(this, true, c);
 
 	}
 
+	public Object[] Reservar() {
+
+		InterfazReservar ir = new InterfazReservar(this, true);
+		Object valoresReserva[] = new Object[3];
+		valoresReserva[0] = ir.getHotelSeleccionado();
+		valoresReserva[1] = ir.getFechaSeleccionada();
+
+		return valoresReserva;
+	}
+	
+	
+	public void mostrarReserva(List<Reserva> lista) {
+		tb.mostrarReservas(lista);
+		
+	}
 	
 	
 	
@@ -86,13 +116,7 @@ public class MenuInterfaz extends JFrame {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
+
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is always
@@ -114,7 +138,7 @@ public class MenuInterfaz extends JFrame {
 
 		ListaOpciones.setModel(new javax.swing.AbstractListModel<String>() {
 			String[] strings = { "Introducir cliente", "Ver todos los clientes", "Buscar cliente por id",
-					"Actualizar Cliente", "Eliminar Cliente" };
+					"Actualizar Cliente", "Eliminar Cliente", "Reservar", "Buscar reservas de un cliente" };
 
 			public int getSize() {
 				return strings.length;
@@ -171,5 +195,7 @@ public class MenuInterfaz extends JFrame {
 	private javax.swing.JPanel jPanel1;
 	private javax.swing.JScrollPane jScrollPane1;
 	// End of variables declaration
+
+
 
 }

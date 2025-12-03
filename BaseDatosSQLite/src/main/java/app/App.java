@@ -5,8 +5,10 @@ import java.sql.SQLException;
 import casos_uso.CasoDos;
 import casos_uso.CasoUno;
 import entidades.Interfaz_de_Pasarela_Clientes;
+import entidades.Interfaz_de_Pasarela_Reservas;
 import pasarela_datos.GestorBD;
 import pasarela_datos.Pasarela_sqlite_Clientes;
+import pasarela_datos.Pasarela_sqlite_Reservas;
 import presentacion.Presentador;
 
 public class App {
@@ -21,13 +23,15 @@ public class App {
 
 			// Crear la pasarela
 			// Puerto para la BBDD
-			Interfaz_de_Pasarela_Clientes pasarela = new Pasarela_sqlite_Clientes();
-
+			Interfaz_de_Pasarela_Clientes pasarelaClientes = new Pasarela_sqlite_Clientes();
+			Interfaz_de_Pasarela_Reservas pasarelaReservas = new Pasarela_sqlite_Reservas();
+			
+			
 			// -----CASOS DE USO-----
 
 			// Crear el caso (inyectando la pasarela)
-			CasoUno casoUno = new CasoUno(pasarela);
-			CasoDos casoDos = new CasoDos(pasarela);
+			CasoUno casoUno = new CasoUno(pasarelaClientes);
+			CasoDos casoDos = new CasoDos(pasarelaReservas);
 
 			// -----PRESENTACION-----
 

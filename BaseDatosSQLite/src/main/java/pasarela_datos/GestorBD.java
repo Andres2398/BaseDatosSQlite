@@ -45,19 +45,21 @@ public class GestorBD {
 
 		final var sql4 = """
 				 CREATE TABLE IF NOT EXISTS Reservas (
-				    Cliente INTEGER NOT NULL,
+				    iDCliente INTEGER NOT NULL,
+				    nombreCliente TEXT NOT NULL,
 				    habitacion INTEGER NOT NULL,
 				    fecha TEXT NOT NULL,
 				    Hotel TEXT NOT NULL,
 				    PRIMARY KEY (Hotel, fecha, habitacion),
-				    FOREIGN KEY (Cliente) REFERENCES usuarios(id),
+				    FOREIGN KEY (iDCliente) REFERENCES usuarios(id),
 				    FOREIGN KEY (habitacion) REFERENCES habitaciones(numero),
 				    FOREIGN KEY (Hotel) REFERENCES Hoteles(Nombre)
 				);
 				""";
 
 		try (Connection con = getConnection(); Statement stmt = con.createStatement()) {
-
+			
+			
 			stmt.execute(sql1);
 			stmt.execute(sql2);
 			stmt.execute(sql3);

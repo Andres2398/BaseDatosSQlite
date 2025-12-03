@@ -15,7 +15,17 @@
 			<version>3.50.3.0</version>
 		</dependency>
 
+	
+	
+	<!-- Dependendicia necesaria para que funcione el calendario-->
+	 <!-- https://mvnrepository.com/artifact/com.toedter/jcalendar -->
+        <dependency>
+            <groupId>com.toedter</groupId>
+            <artifactId>jcalendar</artifactId>
+            <version>1.4</version>
+        </dependency>
 
+	
 	</dependencies>
 
 

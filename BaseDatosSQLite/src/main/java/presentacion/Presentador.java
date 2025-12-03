@@ -1,17 +1,18 @@
 package presentacion;
 
-import java.awt.Menu;
+
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
+
 import java.util.Scanner;
 
 import casos_uso.CasoDos;
 import casos_uso.CasoUno;
 import entidades.Cliente;
+import entidades.Reserva;
 import presentacion.interfaz.MenuInterfaz;
-import presentacion.interfaz.TablaClientes;
 
+import java.time.LocalDate;
 public class Presentador {
 
 	private static Scanner sc = new Scanner(System.in);
@@ -109,6 +110,45 @@ public class Presentador {
 		}
 		
 
+	}
+	
+	
+	
+
+	public void buscarPersona(int idReservar) {
+		List<Cliente> l;
+		try {
+			l = casoUno.buscarPersona(idReservar);
+			if(l.get(0)!=null) {
+				
+			Object valoresReserva[] =menu.Reservar();
+			Reserva r= new Reserva(idReservar, (LocalDate)valoresReserva[1], (String) valoresReserva[0],l.get(0).getNombre());
+			casoDos.reservar(r);
+			
+			}
+			else {
+				//MEnsaje de no hay cliente
+			}
+				
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	public void BuscarReservarPersona(int idbuscarReserva) {
+		try {
+			List <Reserva> lista= casoDos.todasReservas(idbuscarReserva);
+			if(!lista.isEmpty())
+				
+				menu.mostrarReserva(lista);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	

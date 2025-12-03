@@ -5,12 +5,13 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 import entidades.Cliente;
+import entidades.Reserva;
 
 /**
  *
  * @author andre
  */
-public class TablaClientes extends javax.swing.JDialog {
+public class Tabla extends javax.swing.JDialog {
 
     /**
      * Creates new form MostrarTodosCliente
@@ -22,11 +23,11 @@ public class TablaClientes extends javax.swing.JDialog {
     
     
 
-    public TablaClientes(MenuInterfaz menuInterfaz, boolean b, List<Cliente> l) {
+    public Tabla(MenuInterfaz menuInterfaz, boolean b) {
     	  super(menuInterfaz, b);
           initComponents();
           
-          mostrarClientes(l);
+         
 	}
 
 
@@ -34,12 +35,9 @@ public class TablaClientes extends javax.swing.JDialog {
 
 
 
-	private void mostrarClientes(List<Cliente> l) {
-		DefaultTableModel modelo = (DefaultTableModel) jTableClientes.getModel();
+	public void mostrarClientes(List<Cliente> l) {
+		DefaultTableModel modelo = Formatos.formatoCliente();
 		modelo.setRowCount(0);
-		
-			
-		
 		
 		for (Cliente cliente : l) {
 		    modelo.addRow(new Object[]{
@@ -49,10 +47,26 @@ public class TablaClientes extends javax.swing.JDialog {
 		            cliente.getTelefono()
 		        });
 		}
+		jTableClientes.setModel(modelo);
 		setVisible(true);
 	}
 
-
+	public void mostrarReservas(List<Reserva>l) {
+		DefaultTableModel modelo = Formatos.formatoReserva();
+		modelo.setRowCount(0);
+		for (Reserva r : l) {
+		    modelo.addRow(new Object[]{
+		            r.getCliente(),
+		            r.getNombreCliente(),
+		            r.getFecha().toString(),
+		            r.getHabitacion(),
+		            r.getHotel(),
+		            
+		        });
+		}
+		jTableClientes.setModel(modelo);
+		setVisible(true);
+	}
 
 
 

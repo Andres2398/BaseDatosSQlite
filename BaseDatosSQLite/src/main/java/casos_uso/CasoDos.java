@@ -1,22 +1,30 @@
 package casos_uso;
 
+import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
+
 import entidades.Cliente;
 import entidades.Interfaz_de_Pasarela_Clientes;
+import entidades.Interfaz_de_Pasarela_Reservas;
+import entidades.Reserva;
 
 public class CasoDos {
 
-	public CasoDos(Interfaz_de_Pasarela_Clientes pasarela) {
-		// TODO Auto-generated constructor stub
+	private Interfaz_de_Pasarela_Reservas pasarela = null;
+	
+	public CasoDos(Interfaz_de_Pasarela_Reservas pasarela) {
+		this.pasarela=pasarela;
 	}
 
-	public int eliminarPersona(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean reservar(Reserva r) throws SQLException {
+		return pasarela.reservar(r);
 	}
-
-	public void actualizarPersona(Cliente c) {
-		// TODO Auto-generated method stub
-		
+	
+	public List<Reserva> todasReservas(int idCliente) throws SQLException{
+		List<Reserva> lista = new LinkedList<Reserva>();
+		pasarela.buscarReservaCliente(idCliente, lista);
+		return lista;
 	}
 
 }

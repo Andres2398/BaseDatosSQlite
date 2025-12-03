@@ -17,7 +17,7 @@ public class IntroducirId extends javax.swing.JDialog {
     public IntroducirId(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setVisible(true);
+        
     }
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {                                           
